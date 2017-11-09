@@ -1,4 +1,4 @@
-package com.floexample.mytimes;
+package com.hawkeye.mytimes;
 
 import org.junit.Test;
 

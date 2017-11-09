@@ -1,4 +1,4 @@
-package com.floexample.mytimes;
+package com.hawkeye.mytimes;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

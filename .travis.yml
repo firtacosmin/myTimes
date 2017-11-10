@@ -16,19 +16,19 @@ env:
 
 
 
-#before_cache:
-#  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-#  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
-#cache:
-#  directories:
-#    #Gradle Dependencies
-#    - ${HOME}/.gradle/caches/
-#    - ${HOME}/.gradle/wrapper/
-#    # Android build cache
-#    - ${HOME}/.android/build-cache
-#    # Android SDK
-#    - ${HOME}/android-sdk/extras/
+cache:
+  directories:
+    #Gradle Dependencies
+    - ${HOME}/.gradle/caches/
+    - ${HOME}/.gradle/wrapper/
+    # Android build cache
+    - ${HOME}/.android/build-cache
+    # Android SDK
+    - ${HOME}/android-sdk/extras/
 
 android:
   components:

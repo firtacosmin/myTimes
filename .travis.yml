@@ -46,10 +46,10 @@ licenses:
   - google-gdk-license-.+
   - .+
 
-before_script:
-  - android create avd --force -n test -t android-23 --abi $ANDROID_ABI --tag $ANDROID_TAG
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+#before_script:
+#  - android create avd --force -n test -t android-23 --abi $ANDROID_ABI --tag $ANDROID_TAG
+#  - emulator -avd test -no-skin -no-audio -no-window &
+#  - android-wait-for-emulator
+#  - adb shell input keyevent 82 &
 script:
     - bash ./travis-scripts/travis-build.sh

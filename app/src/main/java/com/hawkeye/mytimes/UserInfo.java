@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * Created by CRM on 11/12/2017.
- * This is the clas that will save informations about the user.
+ * This is the class that will save informations about the user.
  */
 
 public class UserInfo {

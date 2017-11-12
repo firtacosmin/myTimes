@@ -16,6 +16,10 @@ public class RegisterActivity extends AppCompatActivity {
     EditText repassword ;
     TextView errorTextView ;
     Button register ;
+    /**
+     * The variable that will save teh newly registered user information
+     */
+    UserInfo userInfo = new UserInfo();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
                 validateFilds();
             }
         });
+
     }
     private void hideError(){
         errorTextView.setVisibility(View.INVISIBLE);
@@ -53,7 +58,9 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (!checkPasswordsCoincide()) {
             printError("Password and repassword are not coincide!");
         } else {
-            System.out.print("toate alea sunt adevarate");
+            String emailString = email.getText().toString();
+            String passwordString = password.getText().toString();
+            userInfo.saveEmailAndPassword(emailString ,passwordString);
             Log.d("RegisterActivity","ok");
         }
     }

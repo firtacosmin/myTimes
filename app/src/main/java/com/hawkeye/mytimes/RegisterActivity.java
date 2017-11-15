@@ -3,11 +3,11 @@ package com.hawkeye.mytimes;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
     //commit test
@@ -16,6 +16,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText repassword ;
     TextView errorTextView ;
     Button register ;
+
     /**
      * The variable that will save teh newly registered user information
      */
@@ -61,7 +62,9 @@ public class RegisterActivity extends AppCompatActivity {
             String emailString = email.getText().toString();
             String passwordString = password.getText().toString();
             userInfo.saveEmailAndPassword(emailString ,passwordString);
-            Log.d("RegisterActivity","ok");
+            Toast.makeText(this,"E-mail and user have been successfully registered ",Toast.LENGTH_LONG).show();
+           clearAllFilds();
+//            Log.d("RegisterActivity","ok");
         }
     }
 
@@ -149,5 +152,11 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+    private void clearAllFilds(){
+        email.getText().clear();
+        password.getText().clear();
+        repassword.getText().clear();
+        errorTextView.setText("");
     }
 }

@@ -22,7 +22,7 @@ public class UserInfo {
 
     public void createSharePref(Context context) {
         sharedPreferences = context.getSharedPreferences("userData", Context.MODE_PRIVATE);
-
-
     }
+
 }
+

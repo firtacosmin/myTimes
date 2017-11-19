@@ -20,7 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * The variable that will save the newly registered user information
      */
-    UserInfo userInfo = new UserInfo();
+    UserInfo userInfo = new UserInfo() ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         userInfo.createSharePref(this);
         email = findViewById(R.id.email_editText);
-        password = findViewById(R.id.password_editText);
+        password = findViewById(R.id.passwordEditText);
         repassword = findViewById(R.id.re_password_editText);
         errorTextView = findViewById(R.id.error_textView);
         register = findViewById(R.id.register_button);
@@ -45,9 +45,6 @@ public class RegisterActivity extends AppCompatActivity {
     private void hideError() {
         errorTextView.setVisibility(View.INVISIBLE);
     }
-
-    ;
-
     private void printError(String error) {
         //set text to the error textview
         errorTextView.setText(error);
@@ -67,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
             String emailString = email.getText().toString();
             String passwordString = password.getText().toString();
             userInfo.saveEmailAndPassword(emailString, passwordString);
-            Toast.makeText(this, "E-mail and user have been successfully registered ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "E-mail and password have been successfully registered ", Toast.LENGTH_LONG).show();
             clearAllFilds();
 //            Log.d("RegisterActivity","ok");
         }

@@ -3,6 +3,8 @@ package com.hawkeye.mytimes;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.hawkeye.mytimes.utils.Consts;
+
 import java.util.Objects;
 
 /**
@@ -11,32 +13,41 @@ import java.util.Objects;
  */
 
 public class UserInfo {
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences accountSharedPreferences;
+    private SharedPreferences appDataSharedPreferences;
 
 
     public void saveEmailAndPassword(String email, String password) {
-        if (sharedPreferences != null) {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
+        if (accountSharedPreferences != null) {
+            SharedPreferences.Editor editor = accountSharedPreferences.edit();
             editor.putString(email, password);
             editor.apply();
         }
     }
-
-    public void createSharePref(Context context) {
-        sharedPreferences = context.getSharedPreferences("userData", Context.MODE_PRIVATE);
+    public void saveLogedinEmail(String e_mail){
+        if(appDataSharedPreferences != null){
+            SharedPreferences.Editor editor = appDataSharedPreferences.edit();
+            editor.putString(Consts.SHARED_PREFS_KEY_LOGIN,e_mail);
+            editor.apply();
+        }
     }
-
+    public void createSharePref(Context context) {
+        accountSharedPreferences = context.getSharedPreferences(Consts.SHARED_PREFS_ACCOUNTS, Context.MODE_PRIVATE);
+        appDataSharedPreferences = context.getSharedPreferences(Consts.SHARED_PREFS_APP_DATA,Context.MODE_PRIVATE);
+    }
     public boolean loginUser(String emailLogin, String passwordLogin) {
-        String shareprefpas = sharedPreferences.getString(emailLogin,"");
+        String shareprefpas = accountSharedPreferences.getString(emailLogin,"");
         if(Objects.equals(shareprefpas, "")){
             return false;
         }
         else if(shareprefpas.equals(passwordLogin)){
+            saveLogedinEmail(emailLogin);
             return true;
         }
         else {
             return false;
         }
+
     }
 }
 

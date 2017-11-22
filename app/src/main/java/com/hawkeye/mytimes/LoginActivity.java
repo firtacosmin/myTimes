@@ -1,5 +1,6 @@
 package com.hawkeye.mytimes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,18 +18,21 @@ public class LoginActivity extends AppCompatActivity {
     EditText password_Login;
     TextView errorTextViewLogin;
     Button loginButton;
+    TextView registerAcount;
     String emailLoginString;
     String passwordLoginString;
 
-
+UserInfo userInfo =new UserInfo();
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        userInfo.createSharePref(this);
         email_Login = findViewById(R.id.loginEditText);
         password_Login = findViewById(R.id.passwordEditText);
         errorTextViewLogin = findViewById(R.id.errorTextViewLogin);
         loginButton = findViewById(R.id.login_button);
+        registerAcount = findViewById(R.id.registerAcount_textView);
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -39,14 +43,24 @@ public class LoginActivity extends AppCompatActivity {
                 validateLoginFields();
             }
         });
+        registerAcount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void validateLoginFields() {
         if (areLoginFieldsEmpy()) {
             printError("Fields should not be empty!");
-        } else {
+        } else if(userInfo.loginUser(emailLoginString,passwordLoginString)) {
             Toast.makeText(this, "E-mail and password have been successfully registered ", Toast.LENGTH_LONG).show();
-            clearAllFilds();
+            clearAllFields();
+        }
+        else  {
+            Toast.makeText(this, "Entered credentials are not valid!  ", Toast.LENGTH_LONG).show();
 
         }
     }
@@ -60,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         return false;
     }
-    private void clearAllFilds(){
+    private void clearAllFields(){
         email_Login.getText().clear();
         password_Login.getText().clear();
         errorTextViewLogin.setText("");

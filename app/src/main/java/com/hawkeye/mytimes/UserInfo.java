@@ -16,24 +16,16 @@ public class UserInfo {
     private SharedPreferences accountSharedPreferences;
     private SharedPreferences appDataSharedPreferences;
 
-
+    public void createSharePref(Context context) {
+        accountSharedPreferences = context.getSharedPreferences(Consts.SHARED_PREFS_ACCOUNTS, Context.MODE_PRIVATE);
+        appDataSharedPreferences = context.getSharedPreferences(Consts.SHARED_PREFS_APP_DATA,Context.MODE_PRIVATE);
+    }
     public void saveEmailAndPassword(String email, String password) {
         if (accountSharedPreferences != null) {
             SharedPreferences.Editor editor = accountSharedPreferences.edit();
             editor.putString(email, password);
             editor.apply();
         }
-    }
-    public void saveLogedinEmail(String e_mail){
-        if(appDataSharedPreferences != null){
-            SharedPreferences.Editor editor = appDataSharedPreferences.edit();
-            editor.putString(Consts.SHARED_PREFS_KEY_LOGIN,e_mail);
-            editor.apply();
-        }
-    }
-    public void createSharePref(Context context) {
-        accountSharedPreferences = context.getSharedPreferences(Consts.SHARED_PREFS_ACCOUNTS, Context.MODE_PRIVATE);
-        appDataSharedPreferences = context.getSharedPreferences(Consts.SHARED_PREFS_APP_DATA,Context.MODE_PRIVATE);
     }
     public boolean loginUser(String emailLogin, String passwordLogin) {
         String shareprefpas = accountSharedPreferences.getString(emailLogin,"");
@@ -48,6 +40,13 @@ public class UserInfo {
             return false;
         }
 
+    }
+    private void saveLogedinEmail(String e_mail){
+        if(appDataSharedPreferences != null){
+            SharedPreferences.Editor editor = appDataSharedPreferences.edit();
+            editor.putString(Consts.SHARED_PREFS_KEY_LOGIN,e_mail);
+            editor.apply();
+        }
     }
 }
 

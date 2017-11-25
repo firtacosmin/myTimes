@@ -56,7 +56,10 @@ UserInfo userInfo =new UserInfo();
         if (areLoginFieldsEmpy()) {
             printError("Fields should not be empty!");
         } else if(userInfo.loginUser(emailLoginString,passwordLoginString)) {
-            Toast.makeText(this, "E-mail and password have been successfully registered ", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(LoginActivity.this,TimeActivity.class);
+            startActivity(intent);
+            finish();
+//            Toast.makeText(this, "E-mail and password have been successfully registered ", Toast.LENGTH_LONG).show();
             clearAllFields();
         }
         else  {

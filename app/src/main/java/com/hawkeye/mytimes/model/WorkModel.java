@@ -25,15 +25,17 @@ public class WorkModel {
         this.title = title;
     }
 
-    public void Start(){
+    public void Start() {
         long start = System.currentTimeMillis();
 
     }
-    public void end(){
-       stop = System.currentTimeMillis();
+
+    public void end() {
+        stop = System.currentTimeMillis();
     }
-    public boolean hasEnded(){
-        if(stop != 0){
+
+    public boolean hasEnded() {
+        if (stop != 0) {
             return true;
         } else {
             return false;

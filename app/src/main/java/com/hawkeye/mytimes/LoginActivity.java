@@ -22,7 +22,8 @@ public class LoginActivity extends AppCompatActivity {
     String emailLoginString;
     String passwordLoginString;
 
-UserInfo userInfo =new UserInfo();
+    UserInfo userInfo = new UserInfo();
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,7 @@ UserInfo userInfo =new UserInfo();
         loginButton = findViewById(R.id.login_button);
         registerAcount = findViewById(R.id.registerAcount_textView);
 
+        autoLogin();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,38 +48,51 @@ UserInfo userInfo =new UserInfo();
         registerAcount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-    private void validateLoginFields() {
-        if (areLoginFieldsEmpy()) {
-            printError("Fields should not be empty!");
-        } else if(userInfo.loginUser(emailLoginString,passwordLoginString)) {
+    public void autoLogin() {
+        if(userInfo.isLoggedInUser()){
             Intent intent = new Intent(LoginActivity.this,TimeActivity.class);
             startActivity(intent);
             finish();
-//            Toast.makeText(this, "E-mail and password have been successfully registered ", Toast.LENGTH_LONG).show();
-            clearAllFields();
         }
-        else  {
-            Toast.makeText(this, "Entered credentials are not valid!  ", Toast.LENGTH_LONG).show();
+    }
+
+    private void validateLoginFields() {
+        if (areLoginFieldsEmpy()) {
+            printError("Fields should not be empty!");
+        } else if (userInfo.loginUser(emailLoginString, passwordLoginString)) {
+            performLogin();
+        } else {
+            Toast.makeText(this, "Entered credentials are not valid! ", Toast.LENGTH_LONG).show();
 
         }
     }
+
+    private void performLogin() {
+        Intent intent = new Intent(LoginActivity.this, TimeActivity.class);
+        startActivity(intent);
+        finish();
+//            Toast.makeText(this, "E-mail and password have been successfully registered ", Toast.LENGTH_LONG).show();
+        clearAllFields();
+    }
+
     private void printError(String errorLogin) {
         errorTextViewLogin.setText(errorLogin);
     }
 
     private boolean areLoginFieldsEmpy() {
-        if(emailLoginString.isEmpty() || passwordLoginString.isEmpty()){
+        if (emailLoginString.isEmpty() || passwordLoginString.isEmpty()) {
             return true;
         }
         return false;
     }
-    private void clearAllFields(){
+
+    private void clearAllFields() {
         email_Login.getText().clear();
         password_Login.getText().clear();
         errorTextViewLogin.setText("");

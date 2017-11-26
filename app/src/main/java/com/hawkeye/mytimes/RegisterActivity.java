@@ -1,4 +1,3 @@
-
 package com.hawkeye.mytimes;
 
 import android.os.Bundle;
@@ -20,7 +19,7 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * The variable that will save the newly registered user information
      */
-    UserInfo userInfo = new UserInfo() ;
+    UserInfo userInfo = new UserInfo();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void hideError() {
         errorTextView.setVisibility(View.INVISIBLE);
     }
+
     private void printError(String error) {
         //set text to the error textview
         errorTextView.setText(error);

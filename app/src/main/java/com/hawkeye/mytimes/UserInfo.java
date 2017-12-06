@@ -3,8 +3,10 @@ package com.hawkeye.mytimes;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.hawkeye.mytimes.model.WorkModel;
 import com.hawkeye.mytimes.utils.Consts;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -20,6 +22,7 @@ public class UserInfo {
         accountSharedPreferences = context.getSharedPreferences(Consts.SHARED_PREFS_ACCOUNTS, Context.MODE_PRIVATE);
         appDataSharedPreferences = context.getSharedPreferences(Consts.SHARED_PREFS_APP_DATA, Context.MODE_PRIVATE);
     }
+
     public void saveEmailAndPassword(String email, String password) {
         if (accountSharedPreferences != null) {
             SharedPreferences.Editor editor = accountSharedPreferences.edit();
@@ -27,6 +30,7 @@ public class UserInfo {
             editor.apply();
         }
     }
+
     public boolean loginUser(String emailLogin, String passwordLogin) {
         String shareprefpas = accountSharedPreferences.getString(emailLogin, "");
         if (Objects.equals(shareprefpas, "")) {
@@ -38,18 +42,21 @@ public class UserInfo {
             return false;
         }
     }
-    public boolean isLoggedInUser(){
-        if(appDataSharedPreferences.getString(Consts.SHARED_PREFS_KEY_LOGIN,null) != null){
+
+    public boolean isLoggedInUser() {
+        if (appDataSharedPreferences.getString(Consts.SHARED_PREFS_KEY_LOGIN, null) != null) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
-    public void logout(){
+
+    public void logout() {
         SharedPreferences.Editor editor = appDataSharedPreferences.edit();
         editor.remove(Consts.SHARED_PREFS_KEY_LOGIN);
         editor.apply();
     }
+
     private void saveLogedinEmail(String e_mail) {
         if (appDataSharedPreferences != null) {
             SharedPreferences.Editor editor = appDataSharedPreferences.edit();
@@ -57,5 +64,22 @@ public class UserInfo {
             editor.apply();
         }
     }
-}
 
+    ArrayList<WorkModel> list = new ArrayList<>();
+
+    public void   startWork() {
+        WorkModel workModel = new WorkModel() ;
+        workModel.Start();
+        list.add(workModel);
+    }
+    public WorkModel getStartedWork() {
+        for (int i = 0;i <= list.size();i++){
+            WorkModel model = list.get(i);
+            if(!model.hasEnded()){
+                return model;
+            }
+        }
+        return null;
+    }
+
+}

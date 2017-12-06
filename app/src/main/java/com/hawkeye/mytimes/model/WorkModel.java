@@ -26,8 +26,7 @@ public class WorkModel {
     }
 
     public void Start() {
-        long start = System.currentTimeMillis();
-
+        start = System.currentTimeMillis();
     }
 
     public void end() {

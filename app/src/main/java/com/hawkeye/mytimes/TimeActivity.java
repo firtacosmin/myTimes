@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class TimeActivity extends AppCompatActivity {
+public class  TimeActivity extends AppCompatActivity {
     UserInfo userInfo = new UserInfo();
 
 
